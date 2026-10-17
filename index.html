@@ -1,16 +1,235 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ملحمة أكتوبر 1973 | العزة والكرامة</title>
-    <!-- ربط خطوط جوجل الفخمة -->
+    <!-- ربط خطوط جوجل الفخمة الملكية -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Amiri:ital@1&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <!-- المكان اللي الـ React هيعرض فيه كل الشغل والـ 3D -->
-    <div id="root"></div>
-  </body>
-</html>
+    
+    <style>
+        /* إعدادات الخطوط والألوان العامة للموقع العسكري */
+        :root {
+          --bg-primary: #121812; /* أخضر عسكري داكن جداً خلفية */
+          --bg-secondary: #1b241b; 
+          --military-green: #2e412e;
+          --gold-3d: #c5a059;
+          --gold-glow: #e6c280;
+          --text-light: #f5f5f5;
+          --shadow-dark: rgba(0, 0, 0, 0.6);
+          --shadow-light: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+          margin: 0; padding: 0;
+          font-family: 'Cairo', sans-serif;
+          background-color: var(--bg-primary);
+          color: var(--text-light);
+          direction: rtl; overflow-x: hidden;
+        }
+
+        /* قائمة علوية بتأثير 3D */
+        .navbar_3d {
+          display: flex; justify-content: space-between; align-items: center;
+          padding: 20px 5%; background: var(--bg-secondary);
+          box-shadow: 0 5px 15px var(--shadow-dark), inset 0 1px 0 var(--shadow-light);
+          position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo_3d {
+          font-weight: 900; font-size: 1.4rem; color: var(--gold-3d);
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--gold-glow);
+        }
+
+        .navbar_3d nav a {
+          color: var(--text-light); text-decoration: none; margin-right: 20px;
+          font-weight: 700; transition: all 0.3s ease;
+        }
+
+        .navbar_3d nav a:hover {
+          color: var(--gold-3d); text-shadow: 0 0 5px var(--gold-glow);
+        }
+
+        /* قسم الـ Hero بتأثير بصري رائع */
+        .hero_section {
+          position: relative; height: 75vh;
+          background: linear-gradient(rgba(18,24,18,0.5), rgba(18,24,18,0.9)), url('https://unsplash.com') no-repeat center center/cover;
+          display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+
+        .text_3d_glow {
+          font-size: 3.5rem; font-weight: 900; color: #fff;
+          text-shadow: 0 1px 0 #ccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15), 0 0 20px var(--gold-glow);
+          margin-bottom: 20px;
+        }
+
+        /* أزرار مجسمة ثلاثية الأبعاد */
+        .btn_3d {
+          display: inline-block; padding: 12px 30px;
+          background: linear-gradient(135deg, var(--gold-3d), #8a6d35);
+          color: #fff; text-decoration: none; font-weight: 700; border-radius: 8px;
+          box-shadow: 0 5px 0 #5e4a24, 0 10px 20px rgba(0,0,0,0.5);
+          transition: all 0.1s ease; border: none; cursor: pointer;
+        }
+
+        .btn_3d:active {
+          transform: translateY(4px); box-shadow: 0 1px 0 #5e4a24, 0 5px 10px rgba(0,0,0,0.5);
+        }
+
+        .greatness_section, .gallery_section { padding: 60px 5%; }
+
+        .section_title_3d {
+          text-align: center; font-size: 2.5rem; color: var(--gold-3d);
+          margin-bottom: 40px; text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+        }
+
+        .cards_container {
+          display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+        }
+
+        .card_3d {
+          background: var(--bg-secondary); padding: 30px; border-radius: 15px;
+          box-shadow: 5px 5px 15px var(--shadow-dark), -5px -5px 15px var(--shadow-light);
+          border: 1px solid rgba(197, 160, 89, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card_3d:hover {
+          transform: translateY(-10px);
+          box-shadow: 10px 15px 25px var(--shadow-dark); border-color: var(--gold-3d);
+        }
+
+        .card_3d h3 { color: var(--gold-3d); margin-top: 0; }
+        .card_3d p { line-height: 1.8; font-size: 0.95rem; font-family: 'Amiri', serif; }
+
+        /* أزرار الفلترة */
+        .filter_buttons {
+          display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px;
+        }
+
+        .filter_buttons button {
+          background: var(--bg-secondary); color: var(--text-light); border: none;
+          padding: 10px 20px; font-family: 'Cairo'; font-weight: 700; border-radius: 5px;
+          cursor: pointer; box-shadow: 3px 3px 6px var(--shadow-dark); transition: all 0.3s ease;
+        }
+
+        .filter_buttons button.active, .filter_buttons button:hover {
+          background: var(--gold-3d); color: #121812; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.4);
+        }
+
+        /* شبكة المعرض والتجاوب */
+        .gallery_grid {
+          display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+        }
+
+        .gallery_card_3d {
+          background: var(--bg-secondary); border-radius: 12px; overflow: hidden;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.4); transition: transform 0.3s ease;
+        }
+
+        .gallery_card_3d:hover { transform: scale(1.04); }
+        .image_container { height: 220px; overflow: hidden; background: #222; }
+        .image_container img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card_info { padding: 20px; }
+        .card_info h3 { font-size: 1.1rem; margin: 0 0 10px 0; color: var(--gold-3d); }
+        .card_info p { font-size: 0.85rem; margin: 0; line-height: 1.6; color: #ccc; }
+
+        .footer_3d {
+          text-align: center; padding: 25px; background: #0d120d;
+          font-size: 0.9rem; border-top: 2px solid var(--gold-3d); margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+          .text_3d_glow { font-size: 2.2rem; }
+          .section_title_3d { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar_3d">
+        <div class="logo_3d">أكتوبر 1973 | العزة والكرامة</div>
+        <nav>
+          <a href="#hero">الرئيسية</a>
+          <a href="#greatness">عظمة الجيش</a>
+          <a href="#gallery">المعرض المرئي</a>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero_section">
+        <div class="hero_content">
+          <h1 class="text_3d_glow">ملحمة العبور والكرامة</h1>
+          <p>الموقع التوثيقي الحصري لبطولات الجيش المصري العظيم في حرب أكتوبر المجيدة</p>
+          <a href="#gallery" class="btn_3d">استكشف المعرض التاريخي</a>
+        </div>
+    </section>
+
+    <section id="greatness" class="greatness_section">
+        <h2 class="section_title_3d">عظمة الجيش المصري والمصريين</h2>
+        <div class="cards_container">
+          <div class="card_3d">
+            <h3>الإرادة والتحدي</h3>
+            <p>أثبت المصريون للعالم أجمع أن إرادة الشعوب لا يمكن أن تقهر. بدمائهم الذكية وسواعدهم القوية، حطم الجنود البواسل أسطورة "الجيش الذي لا يقهر" وعبروا مانعاً مائياً وسداً ترابياً كان يعتبره خبراء العالم مستحيلاً.</p>
+          </div>
+          <div class="card_3d">
+            <h3>التخطيط العبقري</h3>
+            <p>تجلت عظمة الجيش المصري في التخطيط السري والمفاجأة الاستراتيجية التي شلت تفكير العدو. من فكرة استخدام خراطيم المياه البسيطة إلى تنسيق ساعات الهجوم، سطر القادة عبقرية عسكرية تدرس حتى اليوم في أكبر المعاهد الدولية.</p>
+          </div>
+          <div class="card_3d">
+            <h3>امتداد البطولات (أحمد منسي)</h3>
+            <p>إن عقيدة الجيش المصري ثابتة لا تتغير عبر الأجيال. فكما حارب أبطال 1973 لاسترداد الأرض، وقف أبطال معاصرون مثل الشهيد العقيد أحمد منسي ورجاله في مربع البرث، ليدافعوا عن نفس الأرض ضد قوى الإرهاب، مؤكدين أن مصر ولادة بالأبطال دائماً.</p>
+          </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery_section">
+        <h2 class="section_title_3d">المعرض التاريخي المصور</h2>
+        
+        <div class="filter_buttons">
+          <button class="active" onclick="filterGallery('all', this)">الكل</button>
+          <button onclick="filterGallery('planning', this)">التخطيط والسادات</button>
+          <button onclick="filterGallery('crossing', this)">العبور وبارليف</button>
+          <button onclick="filterGallery('heroes', this)">الجنود والأبطال</button>
+          <button onclick="filterGallery('prisoners', this)">الأسرى والكستور</button>
+        </div>
+
+        <div class="gallery_grid" id="galleryGrid">
+            <!-- سيتم رص الكروت هنا تلقائياً بواسطة الجافاسكريبت -->
+        </div>
+    </section>
+
+    <footer class="footer_3d">
+        <p>صنع بكل فخر واعتزاز ببطولات الجيش المصري العظيم © 2026</p>
+    </footer>
+
+    <script>
+        // بيانات المعرض والروابط الحالية (استبدلي روابط الصور بروابطك الحقيقية لاحقاً)
+        const galleryData = [
+          { category: 'planning', title: 'الرئيس السادات يخطط للحرب', description: 'غرفة العمليات المشتركة والتخطيط الاستراتيجي لـ "توجيه إستراتيجي" الذي غير مجرى التاريخ.', imgUrl: 'https://unsplash.com' },
+          { category: 'heroes', title: 'أبطال وجنود حقيقيون', description: 'الشهيد البطل أحمد منسي ورفاقه من أبطال القوات المسلحة الذين ضربوا أروع أمثلة التضحية.', imgUrl: 'https://unsplash.com' },
+          { category: 'crossing', title: 'العبور العظيم وهدم بارليف', description: 'لحظة عبور القناة وتدمير خط بارليف المنيع بخراطيم المياه وصيحات "الله أكبر" تزلزل الأرض.', imgUrl: 'https://unsplash.com' },
+          { category: 'speeches', title: 'خطاب النصر للرئيس السادات', description: 'منبر مجلس الشعب يشهد على أعظم خطاب تاريخي يسطر نصر أكتوبر المجيد واستعادة الكرامة.', imgUrl: 'https://unsplash.com' },
+
+          category: 'prisoners', title: 'الأسرى الإسرائيليين ببيجامات الكستور', description: 'مشهد انكسار العدو وعودتهم ببيجامات الكستور المصرية المحلة، تجسيداً لانتصار الإرادة المصرية.', imgUrl: 'unsplash.com' }
+];
+function displayGallery(items) {
+const grid = document.getElementById('galleryGrid');
+grid.innerHTML = '';
+items.forEach(item => {
+grid.innerHTML += <div class="gallery_card_3d"> <div class="image_container"> <img src="${item.imgUrl}" alt="${item.title}"> </div> <div class="card_info"> <h3>${item.title}</h3> <p>${item.description}</p> </div> </div>;
+});
+}
+function filterGallery(category, button) {
+document.querySelectorAll('.filter_buttons button').forEach(btn => btn.classList.remove('active'));
+button.classList.add('active');
+if(category === 'all') {
+displayGallery(galleryData);
+} else {
+const filtered = galleryData.filter(item => item.category === category);
+displayGallery(filtered);
+}
+}
+// تشغيل المعرض لأول مرة عند فتح الصفحة
+displayGallery(galleryData);
