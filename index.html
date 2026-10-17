@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ملحمة أكتوبر 1973 | العزة والكرامة</title>
     <!-- ربط خطوط جوجل الفخمة الملكية -->
     <link rel="preconnect" href="https://googleapis.com">
@@ -10,140 +10,291 @@
     <link href="https://googleapis.com/css2?family=Amiri:ital@1&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* إعدادات الخطوط والألوان العامة للموقع العسكري */
+        /* إعدادات الألوان العامة والتأثيرات ثلاثية الأبعاد الـ 3D */
         :root {
-          --bg-primary: #121812; /* أخضر عسكري داكن جداً خلفية */
-          --bg-secondary: #1b241b; 
-          --military-green: #2e412e;
+          --bg-primary: #0f140f; 
+          --bg-secondary: #161f16; 
+          --military-green: #253525;
           --gold-3d: #c5a059;
           --gold-glow: #e6c280;
           --text-light: #f5f5f5;
-          --shadow-dark: rgba(0, 0, 0, 0.6);
-          --shadow-light: rgba(255, 255, 255, 0.05);
+          --shadow-dark: rgba(0, 0, 0, 0.7);
+          --shadow-light: rgba(255, 255, 255, 0.03);
+        }
+
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
         }
 
         body {
-          margin: 0; padding: 0;
           font-family: 'Cairo', sans-serif;
           background-color: var(--bg-primary);
           color: var(--text-light);
-          direction: rtl; overflow-x: hidden;
+          direction: rtl;
+          overflow-x: hidden;
+          line-height: 1.6;
         }
 
-        /* قائمة علوية بتأثير 3D */
+        /* قائمة علوية متجاوبة بالكامل بتأثير مجسم */
         .navbar_3d {
-          display: flex; justify-content: space-between; align-items: center;
-          padding: 20px 5%; background: var(--bg-secondary);
-          box-shadow: 0 5px 15px var(--shadow-dark), inset 0 1px 0 var(--shadow-light);
-          position: sticky; top: 0; z-index: 1000;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 5%;
+          background: var(--bg-secondary);
+          box-shadow: 0 4px 15px var(--shadow-dark);
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          border-bottom: 2px solid var(--gold-3d);
         }
 
         .logo_3d {
-          font-weight: 900; font-size: 1.4rem; color: var(--gold-3d);
-          text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--gold-glow);
+          font-weight: 900;
+          font-size: 1.3rem;
+          color: var(--gold-3d);
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.9), 0 0 8px var(--gold-glow);
+        }
+
+        .navbar_3d nav {
+          display: flex;
+          gap: 20px;
         }
 
         .navbar_3d nav a {
-          color: var(--text-light); text-decoration: none; margin-right: 20px;
-          font-weight: 700; transition: all 0.3s ease;
+          color: var(--text-light);
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 1rem;
+          transition: all 0.3s ease;
         }
 
         .navbar_3d nav a:hover {
-          color: var(--gold-3d); text-shadow: 0 0 5px var(--gold-glow);
+          color: var(--gold-3d);
+          text-shadow: 0 0 5px var(--gold-glow);
         }
 
-        /* قسم الـ Hero بتأثير بصري رائع */
+        /* واجهة الـ Hero الرئيسية */
         .hero_section {
-          position: relative; height: 75vh;
-          background: linear-gradient(rgba(18,24,18,0.5), rgba(18,24,18,0.9)), url('https://unsplash.com') no-repeat center center/cover;
-          display: flex; align-items: center; justify-content: center; text-align: center;
+          position: relative;
+          height: 65vh;
+          background: linear-gradient(rgba(15,20,15,0.5), rgba(15,20,15,0.95)), url('https://wikimedia.org') no-repeat center center/cover;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 0 20px;
+        }
+
+        .hero_content {
+          max-width: 800px;
+          z-index: 10;
         }
 
         .text_3d_glow {
-          font-size: 3.5rem; font-weight: 900; color: #fff;
-          text-shadow: 0 1px 0 #ccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15), 0 0 20px var(--gold-glow);
-          margin-bottom: 20px;
+          font-size: 2.8rem;
+          font-weight: 900;
+          color: #fff;
+          text-shadow: 0 2px 0 #bbb, 0 4px 0 #999, 0 6px 1px rgba(0,0,0,.2), 0 0 15px var(--gold-glow);
+          margin-bottom: 15px;
         }
 
-        /* أزرار مجسمة ثلاثية الأبعاد */
+        .hero_content p {
+          font-size: 1.2rem;
+          margin-bottom: 25px;
+          color: #e0e0e0;
+        }
+
+        /* أزرار 3D حقيقية عند الضغط */
         .btn_3d {
-          display: inline-block; padding: 12px 30px;
+          display: inline-block;
+          padding: 12px 28px;
           background: linear-gradient(135deg, var(--gold-3d), #8a6d35);
-          color: #fff; text-decoration: none; font-weight: 700; border-radius: 8px;
-          box-shadow: 0 5px 0 #5e4a24, 0 10px 20px rgba(0,0,0,0.5);
-          transition: all 0.1s ease; border: none; cursor: pointer;
+          color: #fff;
+          text-decoration: none;
+          font-weight: 700;
+          border-radius: 8px;
+          box-shadow: 0 5px 0 #5e4a24, 0 8px 15px rgba(0,0,0,0.6);
+          transition: all 0.1s ease;
+          border: none;
+          cursor: pointer;
+          font-size: 1rem;
         }
 
         .btn_3d:active {
-          transform: translateY(4px); box-shadow: 0 1px 0 #5e4a24, 0 5px 10px rgba(0,0,0,0.5);
+          transform: translateY(4px);
+          box-shadow: 0 1px 0 #5e4a24, 0 4px 8px rgba(0,0,0,0.6);
         }
 
-        .greatness_section, .gallery_section { padding: 60px 5%; }
+        /* الأقسام العامة */
+        .greatness_section, .gallery_section {
+          padding: 60px 5%;
+        }
 
         .section_title_3d {
-          text-align: center; font-size: 2.5rem; color: var(--gold-3d);
-          margin-bottom: 40px; text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+          text-align: center;
+          font-size: 2.2rem;
+          color: var(--gold-3d);
+          margin-bottom: 40px;
+          text-shadow: 2px 2px 0px rgba(0,0,0,0.6);
         }
 
+        /* كروت النصوص وعظمة الجيش */
         .cards_container {
-          display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 25px;
         }
 
         .card_3d {
-          background: var(--bg-secondary); padding: 30px; border-radius: 15px;
-          box-shadow: 5px 5px 15px var(--shadow-dark), -5px -5px 15px var(--shadow-light);
-          border: 1px solid rgba(197, 160, 89, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;
+          background: var(--bg-secondary);
+          padding: 25px;
+          border-radius: 12px;
+          box-shadow: 5px 5px 15px var(--shadow-dark);
+          border: 1px solid rgba(197, 160, 89, 0.1);
+          transition: transform 0.3s ease;
         }
 
         .card_3d:hover {
-          transform: translateY(-10px);
-          box-shadow: 10px 15px 25px var(--shadow-dark); border-color: var(--gold-3d);
+          transform: translateY(-8px);
+          border-color: var(--gold-3d);
         }
 
-        .card_3d h3 { color: var(--gold-3d); margin-top: 0; }
-        .card_3d p { line-height: 1.8; font-size: 0.95rem; font-family: 'Amiri', serif; }
+        .card_3d h3 {
+          color: var(--gold-3d);
+          margin-bottom: 15px;
+          font-size: 1.3rem;
+        }
 
-        /* أزرار الفلترة */
+        .card_3d p {
+          font-family: 'Amiri', serif;
+          font-size: 1.05rem;
+          color: #e0e0e0;
+          text-align: justify;
+        }
+
+        /* أزرار الفلترة المخصصة للشاشات الصغيرة */
         .filter_buttons {
-          display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-bottom: 35px;
         }
 
         .filter_buttons button {
-          background: var(--bg-secondary); color: var(--text-light); border: none;
-          padding: 10px 20px; font-family: 'Cairo'; font-weight: 700; border-radius: 5px;
-          cursor: pointer; box-shadow: 3px 3px 6px var(--shadow-dark); transition: all 0.3s ease;
+          background: var(--bg-secondary);
+          color: var(--text-light);
+          border: 1px solid rgba(197, 160, 89, 0.2);
+          padding: 10px 18px;
+          font-family: 'Cairo';
+          font-weight: 700;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 0.9rem;
         }
 
         .filter_buttons button.active, .filter_buttons button:hover {
-          background: var(--gold-3d); color: #121812; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.4);
+          background: var(--gold-3d);
+          color: #0f140f;
+          box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
         }
 
-        /* شبكة المعرض والتجاوب */
+        /* شبكة المعرض المتجاوبة بالكامل */
         .gallery_grid {
-          display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 25px;
         }
 
         .gallery_card_3d {
-          background: var(--bg-secondary); border-radius: 12px; overflow: hidden;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.4); transition: transform 0.3s ease;
+          background: var(--bg-secondary);
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+          border: 1px solid rgba(255,255,255,0.05);
+          transition: transform 0.3s ease;
+          display: flex;
+          flex-direction: column;
         }
 
-        .gallery_card_3d:hover { transform: scale(1.04); }
-        .image_container { height: 220px; overflow: hidden; background: #222; }
-        .image_container img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery_card_3d:hover {
+          transform: scale(1.03);
+          border-color: var(--gold-3d);
+        }
 
-        .card_info { padding: 20px; }
-        .card_info h3 { font-size: 1.1rem; margin: 0 0 10px 0; color: var(--gold-3d); }
-        .card_info p { font-size: 0.85rem; margin: 0; line-height: 1.6; color: #ccc; }
+        .image_container {
+          width: 100%;
+          height: 220px;
+          overflow: hidden;
+          background: #111;
+        }
+
+        .image_container img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .card_info {
+          padding: 20px;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .card_info h3 {
+          font-size: 1.1rem;
+          color: var(--gold-3d);
+          margin-bottom: 10px;
+        }
+
+        .card_info p {
+          font-size: 0.9rem;
+          color: #ccc;
+        }
 
         .footer_3d {
-          text-align: center; padding: 25px; background: #0d120d;
-          font-size: 0.9rem; border-top: 2px solid var(--gold-3d); margin-top: 40px;
+          text-align: center;
+          padding: 20px;
+          background: #090d09;
+          font-size: 0.9rem;
+          border-top: 2px solid var(--gold-3d);
+          margin-top: 50px;
         }
 
+        /* حلول التجاوب التام لشاشة تابلت المدرسة والموبايلات */
         @media (max-width: 768px) {
-          .text_3d_glow { font-size: 2.2rem; }
-          .section_title_3d { font-size: 1.8rem; }
+          .navbar_3d {
+            flex-direction: column;
+            gap: 12px;
+            text-align: center;
+            padding: 15px;
+          }
+          .navbar_3d nav {
+            gap: 15px;
+          }
+          .text_3d_glow {
+            font-size: 1.9rem;
+          }
+          .hero_content p {
+            font-size: 1rem;
+          }
+          .section_title_3d {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+          }
+          .greatness_section, .gallery_section {
+            padding: 40px 3%;
+          }
+          .filter_buttons button {
+            padding: 8px 14px;
+            font-size: 0.8rem;
+          }
         }
     </style>
 </head>
@@ -154,7 +305,7 @@
         <nav>
           <a href="#hero">الرئيسية</a>
           <a href="#greatness">عظمة الجيش</a>
-          <a href="#gallery">المعرض المرئي</a>
+          <a href="#gallery">المعرض</a>
         </nav>
     </header>
 
@@ -171,54 +322,37 @@
         <div class="cards_container">
           <div class="card_3d">
             <h3>الإرادة والتحدي</h3>
-            <p>أثبت المصريون للعالم أجمع أن إرادة الشعوب لا يمكن أن تقهر. بدمائهم الذكية وسواعدهم القوية، حطم الجنود البواسل أسطورة "الجيش الذي لا يقهر" وعبروا مانعاً مائياً وسداً ترابياً كان يعتبره خبراء العالم مستحيلاً.</p>
+            <p>أثبت المصريون للعالم أجمع أن إرادة الشعوب لا يمكن أن تقهر. بدمائهم الذكية وسواعدهم القوية، حطم الجنود البواسل أسطورة "الجيش الذي لا يقهر" وعبروا مانعاً مائياً وسداً ترابياً كان يعتبره خبراء العالم مستحيلاً في ست ساعات فقط.</p>
           </div>
           <div class="card_3d">
             <h3>التخطيط العبقري</h3>
-            <p>تجلت عظمة الجيش المصري في التخطيط السري والمفاجأة الاستراتيجية التي شلت تفكير العدو. من فكرة استخدام خراطيم المياه البسيطة إلى تنسيق ساعات الهجوم، سطر القادة عبقرية عسكرية تدرس حتى اليوم في أكبر المعاهد الدولية.</p>
+            <p>تجلت عظمة الجيش المصري في التخطيط السري والمفاجأة الاستراتيجية التي شلت تفكير العدو. من فكرة استخدام خراطيم المياه البسيطة بتوقيع المهندس زكي باقي إلى تنسيق ساعات الهجوم، سطر القادة عبقرية عسكرية تُدرّس في المعاهد الدولية.</p>
           </div>
           <div class="card_3d">
             <h3>امتداد البطولات (أحمد منسي)</h3>
-            <p>إن عقيدة الجيش المصري ثابتة لا تتغير عبر الأجيال. فكما حارب أبطال 1973 لاسترداد الأرض، وقف أبطال معاصرون مثل الشهيد العقيد أحمد منسي ورجاله في مربع البرث، ليدافعوا عن نفس الأرض ضد قوى الإرهاب، مؤكدين أن مصر ولادة بالأبطال دائماً.</p>
-          </div>
-        </div>
-    </section>
+إن عقيدة الجيش المصري ثابتة لا تتغير عبر الأجيال. فكما حارب أبطال 1973 لاسترداد الأرض، وقف أبطال معاصرون مثل الشهيد العقيد أحمد منسي ورجاله في كمين البرث، ليدافعوا عن نفس الأرض الطاهرة ضد قوى الإرهاب الخبيثة.
 
-    <section id="gallery" class="gallery_section">
-        <h2 class="section_title_3d">المعرض التاريخي المصور</h2>
-        
-        <div class="filter_buttons">
-          <button class="active" onclick="filterGallery('all', this)">الكل</button>
-          <button onclick="filterGallery('planning', this)">التخطيط والسادات</button>
-          <button onclick="filterGallery('crossing', this)">العبور وبارليف</button>
-          <button onclick="filterGallery('heroes', this)">الجنود والأبطال</button>
-          <button onclick="filterGallery('prisoners', this)">الأسرى والكستور</button>
-        </div>
 
-        <div class="gallery_grid" id="galleryGrid">
-            <!-- سيتم رص الكروت هنا تلقائياً بواسطة الجافاسكريبت -->
-        </div>
-    </section>
-
-    <footer class="footer_3d">
-        <p>صنع بكل فخر واعتزاز ببطولات الجيش المصري العظيم © 2026</p>
-    </footer>
-
-    <script>
-        // بيانات المعرض والروابط الحالية (استبدلي روابط الصور بروابطك الحقيقية لاحقاً)
-        const galleryData = [
-          { category: 'planning', title: 'الرئيس السادات يخطط للحرب', description: 'غرفة العمليات المشتركة والتخطيط الاستراتيجي لـ "توجيه إستراتيجي" الذي غير مجرى التاريخ.', imgUrl: 'https://unsplash.com' },
-          { category: 'heroes', title: 'أبطال وجنود حقيقيون', description: 'الشهيد البطل أحمد منسي ورفاقه من أبطال القوات المسلحة الذين ضربوا أروع أمثلة التضحية.', imgUrl: 'https://unsplash.com' },
-          { category: 'crossing', title: 'العبور العظيم وهدم بارليف', description: 'لحظة عبور القناة وتدمير خط بارليف المنيع بخراطيم المياه وصيحات "الله أكبر" تزلزل الأرض.', imgUrl: 'https://unsplash.com' },
-          { category: 'speeches', title: 'خطاب النصر للرئيس السادات', description: 'منبر مجلس الشعب يشهد على أعظم خطاب تاريخي يسطر نصر أكتوبر المجيد واستعادة الكرامة.', imgUrl: 'https://unsplash.com' },
-
-          category: 'prisoners', title: 'الأسرى الإسرائيليين ببيجامات الكستور', description: 'مشهد انكسار العدو وعودتهم ببيجامات الكستور المصرية المحلة، تجسيداً لانتصار الإرادة المصرية.', imgUrl: 'unsplash.com' }
+المعرض التاريخي المصور
+الكل
+التخطيط والسادات
+العبور وبارليف
+الجنود والأبطال
+الأسرى والكستور
+صنع بكل فخر واعتزاز ببطولات الجيش المصري العظيم © 2026
+// مصفوفة البيانات بالروابط التاريخية المباشرة والصحيحة من أرشيف ويكيبيديا لتعمل لايف
+const galleryData = [
+{ category: 'planning', title: 'الرئيس السادات يخطط للحرب', description: 'الرئيس أنور السادات داخل غرفة عمليات القوات المسلحة محاطاً بالقادة لمتابعة خريطة التخطيط الإستراتيجي لساعة الصفر وعملية العبور العظيم.', imgUrl: 'wikimedia.org' },
+{ category: 'heroes', title: 'الجنود البواسل والأبطال الحقيقيين', description: 'صورة وثائقية تجسد استبسال وبطولة المقاتل المصري على جبهات القتال، وهي نفس العقيدة العسكرية التي توارثها أبطالنا المعاصرون مثل الشهيد أحمد منسي.', imgUrl: 'wikimedia.org' },
+{ category: 'crossing', title: 'العبور العظيم واجتياح بارليف', description: 'جنود الجيش المصري البواسل يرفعون العلم المصري فوق تحصينات خط بارليف الترابية المنهارة وقوارب العبور تعبر القناة تحت صيحات الله أكبر.', imgUrl: 'wikimedia.org' },
+{ category: 'planning', title: 'خطاب النصر التاريخي للرئيس السادات', description: 'منبر مجلس الشعب المصري يسجل لحظة إلقاء الرئيس الراحل خطاب النصر التاريخي معلناً استعادة السيادة وإعادة الملاحة بقناة السويس وكاسراً غطرسة العدو.', imgUrl: 'wikimedia.org' },
+{ category: 'prisoners', title: 'الأسرى الإسرائيليين ببيجامات الكستور', description: 'مشهد انكسار جنود العدو المستسلمين في معارك سيناء أثناء ترحيلهم ببيجامات الكستور المحلاوية المصرية الشهيرة كتوثيق لانتصار الكرامة والإرادة.', imgUrl: 'wikimedia.org' }
 ];
 function displayGallery(items) {
 const grid = document.getElementById('galleryGrid');
 grid.innerHTML = '';
 items.forEach(item => {
-grid.innerHTML += <div class="gallery_card_3d"> <div class="image_container"> <img src="${item.imgUrl}" alt="${item.title}"> </div> <div class="card_info"> <h3>${item.title}</h3> <p>${item.description}</p> </div> </div>;
+grid.innerHTML += <div class="gallery_card_3d"> <div class="image_container"> <img src="${item.imgUrl}" alt="${item.title}" onerror="this.src='https://placeholder.com'"> </div> <div class="card_info"> <h3>${item.title}</h3> <p>${item.description}</p> </div> </div>;
 });
 }
 function filterGallery(category, button) {
@@ -231,5 +365,5 @@ const filtered = galleryData.filter(item => item.category === category);
 displayGallery(filtered);
 }
 }
-// تشغيل المعرض لأول مرة عند فتح الصفحة
+// تشغيل المعرض فور تحميل الصفحة
 displayGallery(galleryData);
